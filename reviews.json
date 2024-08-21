@@ -1,0 +1,124 @@
+{
+    "reviews": [
+      {
+        "restaurant": "Bella Italia",
+        "cuisine": "Italian",
+        "stars": 5,
+        "review": "Amazing pasta and great ambiance! Highly recommended."
+      },
+      {
+        "restaurant": "Sushi Sakura",
+        "cuisine": "Japanese",
+        "stars": 4,
+        "review": "Fresh sushi and friendly staff. A bit pricey but worth it."
+      },
+      {
+        "restaurant": "Spice Route",
+        "cuisine": "Indian",
+        "stars": 3,
+        "review": "Good food, but the service was a bit slow. Nice decor."
+      },
+      {
+        "restaurant": "Burger Haven",
+        "cuisine": "American",
+        "stars": 5,
+        "review": "Best burgers in town! Great value for money."
+      },
+      {
+        "restaurant": "Taco Fiesta",
+        "cuisine": "Mexican",
+        "stars": 4,
+        "review": "Delicious tacos and a fun atmosphere. A must-try."
+      },
+      {
+        "restaurant": "Le Petit Cafe",
+        "cuisine": "French",
+        "stars": 5,
+        "review": "Charming café with excellent pastries and coffee."
+      },
+      {
+        "restaurant": "Dragon Garden",
+        "cuisine": "Chinese",
+        "stars": 2,
+        "review": "The food was okay, but the place was too crowded."
+      },
+      {
+        "restaurant": "The Greek Spot",
+        "cuisine": "Greek",
+        "stars": 4,
+        "review": "Authentic Greek food with generous portions. Will visit again."
+      },
+      {
+        "restaurant": "Vegan Delight",
+        "cuisine": "Vegan",
+        "stars": 5,
+        "review": "Amazing variety of vegan dishes, all delicious."
+      },
+      {
+        "restaurant": "Pizza Palace",
+        "cuisine": "Italian",
+        "stars": 3,
+        "review": "Good pizza, but the service could be better."
+      },
+      {
+        "restaurant": "BBQ Nation",
+        "cuisine": "American",
+        "stars": 4,
+        "review": "Great BBQ with a wide selection of sauces."
+      },
+      {
+        "restaurant": "Curry House",
+        "cuisine": "Indian",
+        "stars": 5,
+        "review": "The best curry I've had in years. A hidden gem."
+      },
+      {
+        "restaurant": "Sushi Zen",
+        "cuisine": "Japanese",
+        "stars": 4,
+        "review": "Nice variety of sushi rolls, but the place is small."
+      },
+      {
+        "restaurant": "Tapas & Wine",
+        "cuisine": "Spanish",
+        "stars": 5,
+        "review": "Lovely tapas and a great selection of wines. Perfect for a date night."
+      },
+      {
+        "restaurant": "The Green Bowl",
+        "cuisine": "Salad",
+        "stars": 3,
+        "review": "Healthy options, but a bit overpriced for the portion sizes."
+      },
+      {
+        "restaurant": "Fish & Chips Co.",
+        "cuisine": "British",
+        "stars": 4,
+        "review": "Classic fish and chips, done right. Very satisfying."
+      },
+      {
+        "restaurant": "El Ranchero",
+        "cuisine": "Mexican",
+        "stars": 5,
+        "review": "Authentic Mexican flavors with great service. Highly recommended."
+      },
+      {
+        "restaurant": "Bagel Bros",
+        "cuisine": "Deli",
+        "stars": 4,
+        "review": "Tasty bagels with a variety of fillings. Great for a quick bite."
+      },
+      {
+        "restaurant": "Thai Orchid",
+        "cuisine": "Thai",
+        "stars": 5,
+        "review": "Delicious and authentic Thai food. The curries are a must-try."
+      },
+      {
+        "restaurant": "Bistro Paris",
+        "cuisine": "French",
+        "stars": 3,
+        "review": "Nice atmosphere, but the food was just average."
+      }
+    ]
+}
