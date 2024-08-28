@@ -16,78 +16,79 @@ Encourage users to explore new and exciting dining experiences based on their pr
 `;
 
 export async function POST(req) {
-    const data = await req.json();
-    
-    const pc = new Pinecone({
-        apiKey: process.env.PINECONE_API_KEY,
-    });
-    const index = pc.index('rag').namespace('ns1');
-    const openai = new OpenAI();
+  const data = await req.json();
 
-    const text = data[data.length - 1].content;
-    const embedding = await openai.embeddings.create({
-        model: 'text-embedding-3-small',
-        input: text,
-        encoding_format: 'float',
-    });
+  const pc = new Pinecone({
+    apiKey: process.env.PINECONE_API_KEY,
+  });
+  const index = pc.index('rag').namespace('ns1');
+  const openai = new OpenAI();
 
-    const results = await index.query({
-        vector: embedding.data[0].embedding,
-        topK: 5,
-        includeMetadata: true
-    });
+  const text = data[data.length - 1].content;
+  const embedding = await openai.embeddings.create({
+    model: 'text-embedding-3-small',
+    input: text,
+    encoding_format: 'float',
+  });
 
-    let resultString = '';
-    if (results.matches && Array.isArray(results.matches)) {
-        results.matches.forEach((match) => {
-            resultString += `
+  const results = await index.query({
+    vector: embedding.data[0].embedding,
+    topK: 5,
+    includeMetadata: true,
+  });
+
+  let resultString = '';
+  if (results.matches && Array.isArray(results.matches)) {
+    results.matches.forEach((match) => {
+      resultString += `
             Returned Results:
             Restaurant: ${match.id}
-            Review: ${match.metadata.stars}
+            Review: ${match.metadata.rating}
             Cuisine: ${match.metadata.cuisine}
-            Stars: ${match.metadata.stars}
+            Rating: ${match.metadata.rating}
             \n\n`;
-        });
-    } else {
-        resultString = 'No matches found.';
-    }
-
-    const lastMessage = data[data.length - 1];
-    const lastMessageContent = lastMessage.content + resultString;
-    const lastDataWithoutLastMessage = data.slice(0, data.length - 1);
-
-    const completion = await openai.chat.completions.create({
-        messages: [{
-                role: 'system',
-                content: systemPrompt
-            },
-            ...lastDataWithoutLastMessage,
-            {
-                role: 'user',
-                content: lastMessageContent
-            },
-        ],
-        model: 'gpt-3.5-turbo',
-        stream: true
     });
+  } else {
+    resultString = 'No matches found.';
+  }
 
-    const stream = new ReadableStream({
-        async start(controller) {
-            const encoder = new TextEncoder();
-            try {
-                for await (const chunk of completion) {
-                    const content = chunk.choices[0]?.delta?.content;
-                    if (content) {
-                        const text = encoder.encode(content);
-                        controller.enqueue(text);
-                    }
-                }
-            } catch (err) {
-                controller.error(err);
-            } finally {
-                controller.close();
-            }
+  const lastMessage = data[data.length - 1];
+  const lastMessageContent = lastMessage.content + resultString;
+  const lastDataWithoutLastMessage = data.slice(0, data.length - 1);
+
+  const completion = await openai.chat.completions.create({
+    messages: [
+      {
+        role: 'system',
+        content: systemPrompt,
+      },
+      ...lastDataWithoutLastMessage,
+      {
+        role: 'user',
+        content: lastMessageContent,
+      },
+    ],
+    model: 'gpt-3.5-turbo',
+    stream: true,
+  });
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      const encoder = new TextEncoder();
+      try {
+        for await (const chunk of completion) {
+          const content = chunk.choices[0]?.delta?.content;
+          if (content) {
+            const text = encoder.encode(content);
+            controller.enqueue(text);
+          }
         }
-    });
-    return new NextResponse(stream);
+      } catch (err) {
+        controller.error(err);
+      } finally {
+        controller.close();
+      }
+    },
+  });
+  return new NextResponse(stream);
 }
